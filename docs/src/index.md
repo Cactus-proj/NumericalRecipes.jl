@@ -4,7 +4,7 @@ CurrentModule = NumericalRecipes
 
 # NumericalRecipes
 
-Documentation for [NumericalRecipes](https://github.com/inkydragon/NumericalRecipes.jl).
+Documentation for [NumericalRecipes](https://github.com/cactus-proj/NumericalRecipes.jl).
 
 ```@index
 ```

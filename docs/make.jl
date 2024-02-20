@@ -8,7 +8,7 @@ makedocs(;
     authors="woclass <git@wo-class.cn> and contributors",
     sitename="NumericalRecipes.jl",
     format=Documenter.HTML(;
-        canonical="https://inkydragon.github.io/NumericalRecipes.jl",
+        canonical="https://cactus-proj.github.io/NumericalRecipes.jl",
         edit_link="main",
         assets=String[],
     ),
@@ -18,6 +18,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/inkydragon/NumericalRecipes.jl",
+    repo="github.com/cactus-proj/NumericalRecipes.jl",
     devbranch="main",
 )
