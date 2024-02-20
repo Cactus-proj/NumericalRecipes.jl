@@ -18,4 +18,6 @@
 
 module Special
 
+include("gamma.jl")
+
 end #Special
