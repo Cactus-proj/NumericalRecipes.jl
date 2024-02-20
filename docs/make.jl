@@ -18,6 +18,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/cactus-proj/NumericalRecipes.jl",
+    repo="github.com/Cactus-proj/NumericalRecipes.jl",
     devbranch="main",
 )
