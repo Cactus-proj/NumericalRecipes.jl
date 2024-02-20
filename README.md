@@ -6,13 +6,13 @@
 [![Coverage](https://codecov.io/gh/inkydragon/NumericalRecipes.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/inkydragon/NumericalRecipes.jl)
 
 # License
-This project is for research and study purposes only.
-The algorithm is derived from <Numerical Recipes>,
+This project is for research and study purposes only.  
+The algorithm is derived from `<Numerical Recipes>`,
 All rights reserved by the authors of the original book.
 
 Newly written code uses the MIT license.
 
-> 本项目仅供学习研究之用。
+> 本项目仅供学习研究之用。  
 > 使用的算法来源自《数值食谱》，
 > 原书作者保留所有权利。
 >
