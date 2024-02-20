@@ -25,13 +25,16 @@ function gammln(x)
     end
 
     y = x
+    # XXX:    607/128
     tmp = x + 671/128
     tmp = (x + 0.5) * log(tmp) - tmp
+    # XXX: 也许应该添加到 _GAMMALN_COF 中
     ser = 0.999999999999997092
-    
+
     for j = 1:14
+        # XXX: y=x+j,  避免可能的多次舍入
         y += 1
-        # XXX: 也许应该逆向求和，小项在前
+        # XXX: 应该逆向求和，小项在前
         ser += _GAMMALN_COF[j] / y
     end
 
