@@ -13,10 +13,10 @@ const SF = SpecialFunctions
         end
     end
 
-    @test_throws "bad arg in gammln" gammln(0)
-    @test_throws "bad arg in gammln" gammln(+0.0)
-    @test_throws "bad arg in gammln" gammln(-0.0)
-    @test_throws "bad arg in gammln" gammln(-1)
+    @test_throws DomainError gammln(0)
+    @test_throws DomainError gammln(+0.0)
+    @test_throws DomainError gammln(-0.0)
+    @test_throws DomainError gammln(-1)
 
     test_gammaln(NaN)
     @test_broken Inf === gammln(Inf)
