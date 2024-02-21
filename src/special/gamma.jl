@@ -18,6 +18,15 @@ Compute `ln( Γ(x) )`, for `x > 0`,
 Throw `DomainError` when `x <= 0`.
 
 Ref: [NR3-6.1.5]
+
+## ULPs
+- `(0.0, floatmax(Float64))`:
+    max 78238.36347022826 at x = 0.9999808300756301
+    mean 2009.6334599835423
+
+- `[1e-3, 1e3]`
+    max 116770.38646089876 at x = 0.9998994144540423
+    mean 11.544807137412029
 """
 function gammln(x)
     if x <= 0
