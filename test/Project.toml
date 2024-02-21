@@ -1,6 +1,8 @@
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+FunctionAccuracyTests = "c7c8a6d5-64ef-4165-b05f-11d5e183af77"
 LocalCoverage = "5f6e1e16-694c-5876-87ef-16b5274f298e"
 NumericalRecipes = "bad5a67b-0cee-4d24-8535-48c98e857614"
+PlotlyJS = "f0f68f2c-4968-5e81-91da-67840de0976a"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

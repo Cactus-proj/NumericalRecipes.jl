@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: MIT
+using Test
 import NumericalRecipes.Special: gammln
 import SpecialFunctions
 const SF = SpecialFunctions
@@ -54,22 +55,89 @@ function rand_floatmax(times=10^3)
     rand(Float64, times) * floatmax(Float64)
 end
 
-# using FunctionAccuracyTests
-# Need FunctionAccuracyTests
-function max_ulp()
+
+if abspath(PROGRAM_FILE) == @__FILE__
+    using FunctionAccuracyTests
+    import FunctionAccuracyTests: countulp
+    import Statistics: mean 
+    using PlotlyJS
+
+    function max_ulp()
+        x = [
+            1:10^3...,
+            rand_common(10^3)...,
+            rand_subnormal(10^3)...,
+            rand_normal(10^3)...,
+            rand_f64(10^3)...,
+            rand_floatmax(10^3)...,
+        ]
+
+        fmap = Dict([ gammln => SF.loggamma ])
+        # (0.0, floatmax(Float64))
+        test_acc(fmap, x)
+
+        # [1e-3, 1e3]
+        test_acc(fmap, rand_common(10^5))
+    end
+
+    function fulp(f::Function, ref::Function, x::T) where {T<:Number}
+        y = f(x)
+        r = ref(big(x))
+        countulp(T, y, r)
+    end
+
+    function gen_ulp(ftup::Tuple{Function, Function}, xx)
+        let (xfun, fun) = ftup
+            fulp.(xfun, fun, xx)
+        end
+    end
+
+
+    function ulp_plot(f::Function, ref::Function, xx)
+        # ---- Get ULP
+        # calc all ULPs
+        ulps = fulp.(f, ref, xx);
+        # mean ULP
+        ulp_mean = mean(ulps)
+
+        # ---- Plot
+        
+        # title
+        plot_title = "$(f) v.s. $(ref) (Baseline)"
+        fig = plot([
+            # ULP points
+            scatter(x=xx, y=ulps, mode="markers", name="test ULPs"),
+            # 0.5 * ULP line
+            scatter(x=[minimum(xx), maximum(xx)], y=[0.5, 0.5],
+                mode="lines", name="0.5*ULP"),
+            # mean ULP line
+            scatter(x=[minimum(xx), maximum(xx)], y=[ulp_mean, ulp_mean],
+                mode="lines", name="mean ULP"),
+        ], Layout(title=plot_title));
+        # Use log-log axis
+        relayout!(fig,
+            xaxis = attr(type = "log"),
+            yaxis = attr(type = "log")
+        )
+
+        fig
+    end
+
+
+    ulp_plot(gammln, SF.loggamma, rand_common())
+    ulp_plot(SF.loggamma, SF.loggamma, rand_common())
+
+    ulp_plot(gammln, SF.loggamma, rand_subnormal())
+    ulp_plot(SF.loggamma, SF.loggamma, rand_subnormal())
+
     x = [
-        1:10^4...,
-        rand_common(10^4)...,
-        rand_subnormal(10^4)...,
-        rand_normal(10^4)...,
-        rand_f64(10^4)...,
-        rand_floatmax(10^4)...,
-    ]
-
-    fmap = Dict([ gammln => SF.loggamma ])
-    # (0.0, floatmax(Float64))
-    test_acc(fmap, x)
-
-    # [1e-3, 1e3]
-    test_acc(fmap, rand_common(10^5))
+        1:10^3...,
+        rand_common(10^3)...,
+        rand_subnormal(10^3)...,
+        rand_normal(10^3)...,
+        rand_f64(10^3)...,
+        rand_floatmax(10^3)...,
+    ];
+    ulp_plot(gammln, SF.loggamma, x)
+    ulp_plot(SF.loggamma, SF.loggamma, x)
 end
