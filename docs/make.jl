@@ -5,7 +5,7 @@ DocMeta.setdocmeta!(NumericalRecipes, :DocTestSetup, :(using NumericalRecipes); 
 
 makedocs(;
     modules=[NumericalRecipes],
-    authors="woclass <git@wo-class.cn> and contributors",
+    authors="Chengyu HAN <cyhan.dev@outlook.com> and contributors",
     sitename="NumericalRecipes.jl",
     format=Documenter.HTML(;
         canonical="https://cactus-proj.github.io/NumericalRecipes.jl",
